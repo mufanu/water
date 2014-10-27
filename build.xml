@@ -4,10 +4,16 @@
     <property name="dir.build" value=".build"/>
     <property name="dir.classes" value="${dir.build}/classes"/>
     <property name="dir.dist" value=".dist"/>
-    <property name="dir.src.java" value="src/java"/>
+    <property name="dir.src.java" value="src"/>
     <property name="dir.lib" value="lib"/>
     <property name="dir.web" value="web"/>
     <property file="build.properties"/>
+
+    <path id="compile.classpath">
+        <fileset dir="${dir.lib}">
+            <include name="*.jar"/>
+        </fileset>
+    </path>
 
     <target name="clean">
         <delete dir="${dir.build}"/>
@@ -20,8 +26,8 @@
     </target>
 
     <target name="compile" depends="init">
-        <javac debug="true" srcdir="${dir.src.java}" destdir="${dir.classes}">
-            <classpath location="${dir.lib}"/>
+        <javac debug="true" debuglevel="" srcdir="${dir.src.java}" destdir="${dir.classes}">
+            <classpath refid="compile.classpath"/>
         </javac>
     </target>
 
