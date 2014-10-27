@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="waterproof" default="deploy">
+
+    <property name="dir.build" value=".build"/>
+    <property name="dir.classes" value="${dir.build}/classes"/>
+    <property name="dir.dist" value=".dist"/>
+    <property name="dir.src.java" value="src/java"/>
+    <property name="dir.lib" value="lib"/>
+    <property name="dir.web" value="web"/>
+    <property file="build.properties"/>
+
+    <target name="clean">
+        <delete dir="${dir.build}"/>
+        <delete dir="${dir.dist}"/>
+    </target>
+
+    <target name="init">
+        <mkdir dir="${dir.classes}"/>
+        <mkdir dir="${dir.dist}"/>
+    </target>
+
+    <target name="compile" depends="init">
+        <javac debug="true" srcdir="${dir.src.java}" destdir="${dir.classes}">
+            <classpath location="${dir.lib}"/>
+        </javac>
+    </target>
+
+    <target name="build" depends="clean, compile">
+        <war destfile="${dir.dist}/capacity.war" webxml="${dir.web}/WEB-INF/web.xml">
+            <fileset dir="${dir.web}"/>
+            <classes dir="${dir.classes}"/>
+            <lib dir="${dir.lib}"/>
+        </war>
+    </target>
+
+    <target name="deploy" depends="build">
+        <copy todir="${deploy.path}" failonerror="yes">
+            <fileset file="${dir.dist}/capacity.war"/>
+        </copy>
+    </target>
+
+</project>
