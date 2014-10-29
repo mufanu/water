@@ -17,12 +17,11 @@
 <div id="form">
     <h1>Capacity per Employee</h1>
 
-    <form:form method="post" action="${pageContext.servletContext.contextPath}" modelAttribute="string">
+    <form:form method="post" action="${pageContext.servletContext.contextPath}/preview" modelAttribute="search">
         <div class="row">
             <div id="form-group-title" class="form-group col-lg-10">
-                <label class="control-label">Date Time from
-                    <input type="text">
-                </label>
+                <label class="control-label">Date Time from</label>
+                <form:input path="dateTimeFrom" cssClass="form-control"/>
             </div>
         </div>
         <div class="row">
@@ -43,7 +42,7 @@
 </div>
 
 <div id="result">
-
+    ${result}
 </div>
 
 </body>
