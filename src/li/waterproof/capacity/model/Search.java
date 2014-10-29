@@ -1,4 +1,4 @@
-package li.waterproof.capacity;
+package li.waterproof.capacity.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;

@@ -1,6 +1,9 @@
 package li.waterproof.capacity.controller;
 
-import li.waterproof.capacity.Search;
+import li.waterproof.capacity.model.Result;
+import li.waterproof.capacity.model.Search;
+import li.waterproof.capacity.service.WaterService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -10,13 +13,17 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  * @author Fail Mukhametdinov
  */
 @Controller
 @SessionAttributes("search")
-public class CapacityController {
+public class WaterController {
+
+    @Autowired
+    WaterService waterService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
      public ModelAndView index() {
@@ -30,8 +37,10 @@ public class CapacityController {
         // Временно устанавливаем дату вручную
         setDateTime(search);
 
+        List<Result> result1 = waterService.get(search);
+
         ModelAndView modelAndView = new ModelAndView("index");
-        modelAndView.addObject("result", search.getDateTimeFrom());
+        modelAndView.addObject("result", result1);
         return modelAndView;
     }
 
