@@ -2,6 +2,7 @@ package li.waterproof.capacity.service;
 
 import li.waterproof.capacity.model.Result;
 import li.waterproof.capacity.model.Search;
+import net.sf.jasperreports.engine.JRException;
 
 import java.util.List;
 
@@ -10,4 +11,6 @@ import java.util.List;
  */
 public interface WaterService {
     List<Result> get(Search search);
+
+    List<Result> getCSV(Search search) throws JRException;
 }

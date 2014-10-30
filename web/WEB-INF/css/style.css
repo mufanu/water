@@ -1,4 +1,12 @@
-#form {
-    margin: auto;
-    width: 300px;
+body {
+    margin: 50px;
+}
+
+#form, #result {
+    width: 500px;
+}
+
+#result {
+    height: 400px;
+    overflow-y: scroll;
 }

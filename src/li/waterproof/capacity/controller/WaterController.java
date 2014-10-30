@@ -3,6 +3,7 @@ package li.waterproof.capacity.controller;
 import li.waterproof.capacity.model.Result;
 import li.waterproof.capacity.model.Search;
 import li.waterproof.capacity.service.WaterService;
+import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -38,6 +39,18 @@ public class WaterController {
         setDateTime(search);
 
         List<Result> result1 = waterService.get(search);
+
+        ModelAndView modelAndView = new ModelAndView("index");
+        modelAndView.addObject("result", result1);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "csv", method = RequestMethod.POST)
+    public ModelAndView csv(@ModelAttribute Search search, BindingResult result) throws JRException {
+        // Временно устанавливаем дату вручную
+        setDateTime(search);
+
+        List<Result> result1 = waterService.getCSV(search);
 
         ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("result", result1);
